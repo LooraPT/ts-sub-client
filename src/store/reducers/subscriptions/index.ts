@@ -4,6 +4,7 @@ import { ISubscription } from "../../../types/ISubscription";
 
 export interface SubscriptionState {
     subscriptions: ISubscription[];
+    selectedSubscription: ISubscription;
 }
 
 const initialState: SubscriptionState = {
@@ -11,32 +12,33 @@ const initialState: SubscriptionState = {
         {
             id: 1,
             name: "Netflix",
-            img: 'Desktop/nesflix.jpg',
+            img: '',
             description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
             levels: []
         },
         {
             id: 2,
             name: "YouTube Premium",
-            img: 'Desktop/nesflix.jpg',
+            img: '',
             description: 'fdfdffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
             levels: []
         },
         {
             id: 3,
             name: "Spotify",
-            img: 'Desktop/nesflix.jpg',
+            img: '',
             description: 'fdfdfffffffffffffffffffffffffffffffffdfdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
             levels: []
         },
         {
             id: 4,
             name: "Spotify",
-            img: 'Desktop/nesflix.jpg',
+            img: '',
             description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
             levels: []
         },
-    ]
+    ],
+    selectedSubscription: {} as ISubscription
 }
 
 export const subscriptionSlice = createSlice({

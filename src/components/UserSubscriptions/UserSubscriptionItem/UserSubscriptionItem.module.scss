@@ -1,0 +1,44 @@
+.sub {
+    width: 100%;
+    background-color: white;
+    border-radius: 2rem;
+
+    &__title {
+        height: 11.25rem;
+        background-color: #1ED760;
+        border-radius: 2rem 2rem 0 0;
+        padding: 4.3125rem 0 4.3125rem 2.5rem;
+        font-weight: 700;
+        font-size: 1.875rem;
+        line-height: 140%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+
+    &__description {
+        padding: 2rem 1rem 2rem 2.5625rem;
+        min-height: 8.5rem;
+        word-wrap: break-word;
+        font-weight: 400;
+        font-size: 1.125rem;
+
+        div {
+            line-height: 140%;
+            color: #232323;
+            padding-bottom: 1.5rem;
+        }
+
+        button {
+            color: #333333;
+            line-height: 130%;
+            text-decoration: underline;
+            transition: color 0.3s ease 0s;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    color: #b3b0b0f8;
+                }
+            }
+        }
+    }
+}

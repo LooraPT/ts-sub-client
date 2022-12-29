@@ -3,6 +3,12 @@
     flex-direction: column;
     align-items: center;
     row-gap: 1rem;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: black;
+
 
     &__img {
         display: flex;
@@ -33,6 +39,8 @@
                 }
             }
         }
+
+
     }
 
     &__input {

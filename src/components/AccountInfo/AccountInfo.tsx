@@ -16,7 +16,6 @@ const AccountInfo: FC = () => {
 
     const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            console.log(1)
             setFile(e.target.files[0])
             console.log(file)
         }
@@ -34,6 +33,15 @@ const AccountInfo: FC = () => {
                         onChange={fileHandler}
                     />
                 </label>
+            </div>
+            <div className={cl.info__fullName}>
+                Your name: {profileUser.fullName ? profileUser.fullName : 'Empty'}
+            </div>
+            <div className={cl.info__username}>
+                Your username: {profileUser.username ? profileUser.username : 'Empty'}
+            </div>
+            <div className={cl.info__number}>
+                Your phone: {profileUser.phone ? profileUser.phone : 'Empty'}
             </div>
         </div>
     );

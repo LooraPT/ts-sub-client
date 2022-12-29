@@ -5,6 +5,7 @@ import Wallet from '../../assets/Icons/wallet.svg';
 import Setting from '../../assets/Icons/setting.svg';
 import ProfileForm from '../ProfileForm/ProfileForm';
 import AccountInfo from '../AccountInfo/AccountInfo';
+import UserSubscriptions from '../UserSubscriptions/UserSubscriptions';
 
 const UserProfile: FC = () => {
     const [info, setInfo] = useState<boolean>(false);
@@ -54,9 +55,10 @@ const UserProfile: FC = () => {
                             <div className="content-profile__name">My Subscriptions</div>
                         </button>
                     </div>
-                    <div className="content-profile__main">
+                    <div className={subscriptions ? "content-profile__subs" : "content-profile__main"}>
                         {info && <AccountInfo />}
                         {update && <ProfileForm />}
+                        {subscriptions && <UserSubscriptions />}
                     </div>
                 </div>
             </div>
