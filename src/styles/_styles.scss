@@ -1,0 +1,14 @@
+@import '_vars';
+
+#root {
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+[class*="__container"] {
+    max-width: $container;
+    margin: 0 auto;
+    padding: 0 15px;
+}

@@ -1,0 +1,16 @@
+@import '../../styles/vars';
+
+.steps {
+    padding-bottom: 7.5rem;
+
+    &__items {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+
+        @media (max-width: $mobileSmall) {
+            flex-direction: column;
+        }
+
+    }
+}

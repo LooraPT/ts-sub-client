@@ -1,0 +1,35 @@
+@import '../../styles/vars';
+
+.bottom-footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        @media (max-width: $mobile) {
+            flex-direction: column;
+            row-gap: 1rem;
+        }
+    }
+
+    &__copy {
+        flex: 0 1 33.3333%;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 150%;
+        color: #D3D3D3;
+
+        &:nth-child(2) {
+            display: flex;
+            justify-content: center;
+        }
+
+        &:nth-child(3) {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.button {
+    display: inline-block;
+    color: white;
+    background: #1749B3;
+    border-radius: 12px;
+    padding: 1.025rem 2.9rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    transition: all 0.3s ease 0s;
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: #113583;
+        }
+    }
+
+    &._white {
+        background: white;
+        color: black;
+
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.678);
+            }
+        }
+    }
+}

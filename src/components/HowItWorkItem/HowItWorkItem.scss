@@ -1,0 +1,49 @@
+@import '../../styles/vars';
+
+.item-steps {
+    width: 100%;
+    flex: 0 1 33.333%;
+    min-height: 15.75%;
+    background-color: white;
+    box-shadow: 0px 12px 28px rgba(244, 245, 245, 0.2);
+    border-radius: 32px;
+    padding: 3.333333%;
+
+    &__label {
+        display: flex;
+        gap: 0.3rem;
+        justify-content: space-between;
+        margin-bottom: 8.049536%;
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 1.375rem;
+        line-height: 140%;
+        color: #171717;
+        align-self: flex-end;
+
+        @media (max-width: $mobile) {
+            font-size: 1rem;
+
+        }
+    }
+
+    &__img {
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &__text {
+        font-weight: 400;
+        font-size: 1.125rem;
+        line-height: 150%;
+        color: #333333;
+
+        @media (max-width: $mobile) {
+            font-size: 0.7rem;
+
+        }
+    }
+}

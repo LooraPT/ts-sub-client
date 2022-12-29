@@ -1,0 +1,96 @@
+@import '../../styles/vars';
+
+.body-footer {
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    &__container {
+        display: grid;
+        gap: 138px;
+        grid-template-columns: repeat(4, 1fr);
+
+        @media (max-width: $tablet) {
+            gap: 4.125rem;
+            grid-template-columns: repeat(4, 1fr);
+
+        }
+
+
+    }
+}
+
+.menu-footer {
+    &__label {
+        font-weight: 400;
+        font-size: 1.1rem;
+        line-height: 150%;
+        color: white;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    &__link {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 150%;
+        color: white;
+
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.footer {
+    background-color: #1749B3;
+
+    &__logo {
+        img {
+            margin-bottom: 23px;
+        }
+    }
+
+    &__text {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 150%;
+        color: #FFFFFF;
+    }
+
+    &__main {
+        @media (max-width: $mobile) {
+            &:nth-child(1) {
+
+                grid-column: span 4;
+            }
+        }
+    }
+}
+
+
+
+.social {
+    display: flex;
+    gap: 0.5rem;
+    justify-self: flex-end;
+    padding: 0 1rem;
+
+    @media (max-width: $mobileSmall) {
+        grid-column: span 3;
+        justify-self: flex-start;
+    }
+}

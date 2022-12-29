@@ -1,0 +1,91 @@
+@import '../../styles/vars';
+
+.profile {
+    padding-top: 8.75rem;
+    padding-bottom: 7.5rem;
+
+}
+
+.main-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 3.75rem;
+
+    &__title {
+        flex: 1 1 auto;
+        font-weight: 700;
+        font-size: 2.25rem;
+        line-height: 140%;
+        color: #171717;
+
+        @media (max-width: $mobileSmall) {
+            font-size: 1.25rem;
+        }
+    }
+
+    &__exit {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 140%;
+        color: #333333;
+        cursor: pointer;
+    }
+}
+
+.content-profile {
+    display: grid;
+    grid-template-columns: 1fr 67.166667%;
+    column-gap: 2.75rem;
+    row-gap: 2rem;
+
+    &__nav {
+        background: #FFFFFF;
+        max-height: 12.25rem;
+        box-shadow: 0px 12px 28px rgba(177, 177, 177, 0.2);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+    }
+
+    &__button {
+        min-height: 3.125rem;
+        display: flex;
+        align-items: center;
+        padding: 0 1.18rem;
+        gap: 1rem;
+        border-radius: 0.75rem;
+        transition: background-color 0.3s ease 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: #F7F7F7;
+            }
+        }
+    }
+
+    &__name {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 150%;
+        letter-spacing: 0.01em;
+        color: black;
+    }
+
+    &__main {
+        width: 100%;
+        background-color: #FFFFFF;
+        box-shadow: 0px 12px 28px rgba(177, 177, 177, 0.2);
+        border-radius: 0.75rem;
+        padding: 2.5rem;
+    }
+}
+
+._active-profile {
+    background-color: #F7F7F7;
+}

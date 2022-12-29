@@ -1,0 +1,15 @@
+@import '../../styles/vars';
+
+.profile__form {
+    &-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 140%;
+        color: #0D0B10;
+        padding-bottom: 2.5rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}
