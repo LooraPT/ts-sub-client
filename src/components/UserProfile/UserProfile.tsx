@@ -8,8 +8,8 @@ import AccountInfo from '../AccountInfo/AccountInfo';
 import UserSubscriptions from '../UserSubscriptions/UserSubscriptions';
 
 const UserProfile: FC = () => {
-    const [info, setInfo] = useState<boolean>(false);
-    const [update, setUpdate] = useState<boolean>(true);
+    const [info, setInfo] = useState<boolean>(true);
+    const [update, setUpdate] = useState<boolean>(false);
     const [subscriptions, setSubscriptions] = useState<boolean>(false);
 
     const profileInfo = (e: React.MouseEvent<HTMLButtonElement>) => {

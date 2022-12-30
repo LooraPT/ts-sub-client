@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import { useParams } from 'react-router-dom';
+import FaqItems from '../components/FaqItems/FaqItems';
+import SubscriptionPageSection from '../components/SubscriptionPageSection/SubscriptionPageSection';
 
 const Subscription: FC = () => {
-    const { id } = useParams()
 
     return (
-        <div>
-            ONE SUBSCRIPTION {id}
-        </div>
+        <>
+            <SubscriptionPageSection />
+            <FaqItems />
+        </>
     );
 }
 

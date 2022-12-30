@@ -10,6 +10,9 @@ const ProfileForm: FC = () => {
 
     const profileSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setPhone('')
+        setUsername('')
+        setFullName('')
     }
 
     return (

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProfile } from "../../../types/IProfile";
 import { ISubscription } from "../../../types/ISubscription";
 import { IUser } from "../../../types/IUser";
@@ -12,7 +12,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-    auth: true,
+    auth: false,
     user: {} as IUser,
     profile: {} as IProfile,
     subscriptions: [
@@ -37,11 +37,16 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userFetching(state) {
+        userFetching(state, action: PayloadAction<IUser>) {
             state.auth = true
+            state.user = action.payload
+        },
+        userLogout(state) {
+            state.auth = false
+            state.user = {} as IUser
         }
     }
 })
 
 export const userReducers = userSlice.reducer;
-export const { userFetching } = userSlice.actions;
+export const { userFetching, userLogout } = userSlice.actions;

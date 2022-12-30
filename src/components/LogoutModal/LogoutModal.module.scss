@@ -1,0 +1,15 @@
+@import '../../styles/vars';
+
+.button {
+    display: flex;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+
+    @media (max-width: $mobileSmall) {
+        flex-direction: column;
+    }
+
+    button {
+        flex: 1 0 50%;
+    }
+}

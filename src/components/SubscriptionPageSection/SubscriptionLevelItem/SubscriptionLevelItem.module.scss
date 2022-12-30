@@ -1,0 +1,64 @@
+@import '../../../styles/vars';
+
+.level {
+    width: 100%;
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: 0px 12px 28px rgba(244, 245, 245, 0.2);
+
+    &__name {
+        padding: 3.75rem 0 2rem 0;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 140%;
+        text-align: center;
+        color: #0F0F0F;
+    }
+
+    &__border {
+        border-top: 1px solid #DBDBDB;
+        padding-bottom: 2rem;
+    }
+
+    &__info {
+        padding: 0 2.5rem 2.5rem 2.5rem;
+    }
+
+    &__description {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.25rem;
+        padding-bottom: 3.75rem;
+    }
+
+    &__item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+
+        div {
+            min-width: 65.75%;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 150%;
+            color: #5C5C5C;
+            word-wrap: break-word;
+        }
+    }
+
+    &__price {
+        font-weight: 700;
+        font-size: 3.125rem;
+        line-height: 130%;
+        text-align: center;
+        color: #0F0F0F;
+        padding-bottom: 1rem;
+    }
+
+    &__button {
+
+        button {
+            width: 100%;
+        }
+    }
+}

@@ -6,17 +6,22 @@ interface ButtonProps {
     white?: boolean;
     children: React.ReactNode
     disabled?: boolean;
+    black?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ children, white, onClick, disabled, ...props }) => {
+const Button: FC<ButtonProps> = ({ children, white, onClick, disabled, black }) => {
     const classes = ["button"]
 
     if (white) {
         classes.push("_white")
     }
 
+    if (black) {
+        classes.push("_black")
+    }
+
     return (
-        <button onClick={onClick} disabled={disabled} {...props} className={classes.join(' ')}>
+        <button onClick={onClick} disabled={disabled} className={classes.join(' ')}>
             {children}
         </button>
     );

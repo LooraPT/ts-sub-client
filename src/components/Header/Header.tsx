@@ -6,26 +6,13 @@ import Logo from '../../assets/Logo.svg';
 import './Header.scss';
 import Dropdown from '../Dropdown/Dropdown';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { IDropdown } from '../../types/IDropdown';
-import ProfileNall from '../../assets/ProfileNall.svg';
 import ProfileNallAuth from '../../assets/ProfileNallAuth.svg';
 import LogOut from '../../assets/Logout.svg';
 import Social from '../Social/Social';
 import Modal from '../Modal/Modal';
 import AuthForm from '../AuthForm/AuthForm';
-
-const profileDropdown: IDropdown[] = [
-    {
-        path: RouteNames.PROFILE,
-        name: "Profile",
-        img: ProfileNallAuth
-    },
-    {
-        path: RouteNames.MAIN,
-        name: "Logout",
-        img: LogOut
-    },
-]
+import LogoutModal from '../LogoutModal/LogoutModal';
+import Arrow from '../../assets/icon-vector.svg';
 
 const navigationList = [
     {
@@ -46,6 +33,7 @@ const Header: FC = () => {
     const [classes, setClasses] = useState<string[]>(["menu__body"])
     const [modal, setModal] = useState<boolean>(false)
     const [registration, setRegistration] = useState<boolean>(false)
+    const [logoutModal, setLogoutModal] = useState<boolean>(false)
 
     const { auth } = useAppSelector(state => state.user)
     const { subscriptions } = useAppSelector(state => state.subscription)
@@ -79,9 +67,18 @@ const Header: FC = () => {
                                     <NavLink to={nav.path} className="menu__link">{nav.name}</NavLink>
                                 </li>
                             )}
-                            {auth && <li className="menu__item">
-                                <Dropdown dropdownItems={profileDropdown}><img src={ProfileNall} alt="Profile" />Profile</Dropdown>
-                            </li>}
+                            {auth &&
+                                <li className="menu__item">
+                                    <button className="menu__link"><img src={ProfileNallAuth} alt="Profile" /> Profile<img src={Arrow} alt="arrow" /></button>
+                                    <ul className="menu__sub-list profile-menu">
+                                        <li className="menu__sub-item">
+                                            <NavLink to={RouteNames.PROFILE} className="menu__sub-link"><img src={ProfileNallAuth} alt="Img" />Profile</NavLink>
+                                        </li>
+                                        <li className="menu__sub-item">
+                                            <button onClick={() => setLogoutModal(true)} className="menu__sub-link"><img src={LogOut} alt="Img" />Logout</button>
+                                        </li>
+                                    </ul>
+                                </li>}
                         </ul>
                     </nav>
                 </div>
@@ -105,6 +102,10 @@ const Header: FC = () => {
                     setRegistration={setRegistration}
                 />
             </Modal>
+            <LogoutModal
+                active={logoutModal}
+                setActive={setLogoutModal}
+            />
         </header>
     );
 }

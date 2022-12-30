@@ -1,0 +1,37 @@
+@import '../../styles/vars';
+
+.subscription {
+    padding-top: 8.75rem;
+    padding-bottom: 7.5rem;
+
+    &__container {
+        max-width: $container;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    &__levels {
+        display: flex;
+        gap: 1rem;
+
+        @media (max-width: $mobile) {
+            flex-wrap: wrap;
+        }
+
+        div {
+            flex: 0 1 33.333%;
+
+            @media (max-width: $mobile) {
+                flex: 0 1 48%;
+
+                &:last-child {
+                    flex: 0 1 100%;
+                }
+            }
+
+            @media (max-width: $mobileSmall) {
+                flex: 0 1 100%;
+            }
+        }
+    }
+}
