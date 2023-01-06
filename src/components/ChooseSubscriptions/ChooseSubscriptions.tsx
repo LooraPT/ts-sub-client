@@ -7,6 +7,7 @@ import './ChooseSubscriptions.scss';
 const ChooseSubscriptions: FC = () => {
     const { subscriptions } = useAppSelector(state => state.subscription);
 
+
     return (
         <section className="choose">
             <div className="choose__container">

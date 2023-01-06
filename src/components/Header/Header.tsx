@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { RouteNames } from '../../router';
 import Button from '../Button/Button';
@@ -13,30 +13,27 @@ import Modal from '../Modal/Modal';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoutModal from '../LogoutModal/LogoutModal';
 import Arrow from '../../assets/icon-vector.svg';
+import { navigationList } from './navData';
+import { useSubscriptionGetAllQuery } from '../../services/apiSubscription';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { subscriptionFetching } from '../../store/reducers/subscriptions';
 
-const navigationList = [
-    {
-        path: RouteNames.FAQ,
-        name: 'FAQ'
-    },
-    {
-        path: RouteNames.MAIN,
-        name: 'Support'
-    },
-    {
-        path: RouteNames.FAQ,
-        name: 'About'
-    },
-]
 
 const Header: FC = () => {
+    const { data } = useSubscriptionGetAllQuery();
+    const dispatch = useAppDispatch();
     const [classes, setClasses] = useState<string[]>(["menu__body"])
     const [modal, setModal] = useState<boolean>(false)
     const [registration, setRegistration] = useState<boolean>(false)
     const [logoutModal, setLogoutModal] = useState<boolean>(false)
-
     const { auth } = useAppSelector(state => state.user)
     const { subscriptions } = useAppSelector(state => state.subscription)
+
+    useEffect(() => {
+        if (data) {
+            dispatch(subscriptionFetching(data));
+        }
+    }, [data, dispatch])
 
     const menuActive = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (classes.length <= 1) {

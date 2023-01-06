@@ -9,8 +9,8 @@ const subscriptionApi = api.injectEndpoints({
                 url: '/subscription'
             })
         }),
-        subscriptionGetOne: build.query<ISubscription, number>({
-            query: (id: number) => ({
+        subscriptionGetOne: build.query<ISubscription, string>({
+            query: (id: string) => ({
                 url: `/subscription/${id}`
             })
         })

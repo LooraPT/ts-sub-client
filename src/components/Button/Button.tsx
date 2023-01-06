@@ -7,9 +7,10 @@ interface ButtonProps {
     children: React.ReactNode
     disabled?: boolean;
     black?: boolean;
+    type?: "button" | "submit" | "reset" | undefined;
 }
 
-const Button: FC<ButtonProps> = ({ children, white, onClick, disabled, black }) => {
+const Button: FC<ButtonProps> = ({ children, white, onClick, disabled, black, type }) => {
     const classes = ["button"]
 
     if (white) {
@@ -21,7 +22,7 @@ const Button: FC<ButtonProps> = ({ children, white, onClick, disabled, black }) 
     }
 
     return (
-        <button onClick={onClick} disabled={disabled} className={classes.join(' ')}>
+        <button type={type} onClick={onClick} disabled={disabled} className={classes.join(' ')}>
             {children}
         </button>
     );

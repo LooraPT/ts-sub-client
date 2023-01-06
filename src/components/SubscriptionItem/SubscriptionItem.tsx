@@ -22,7 +22,7 @@ const SubscriptionItem: FC<SubscriptionItemProps> = ({ subscription }) => {
                 <Button onClick={() => navigate(RouteNames.SUBSCRIPTION + '/' + subscription.id)}>Learn more</Button>
             </div>
             <div className={cl.choose__img}>
-                <img src={subscription.img ? subscription.img : Nesflix} alt={subscription.name} />
+                <img src={subscription.img ? process.env.REACT_APP_BASE_URL + '/' + subscription.img : Nesflix} alt={subscription.name} />
             </div>
         </div>
     );

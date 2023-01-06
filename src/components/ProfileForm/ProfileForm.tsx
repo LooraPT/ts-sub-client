@@ -19,25 +19,28 @@ const ProfileForm: FC = () => {
         <form className="profile__form" onSubmit={profileSubmit}>
             <div className="profile__form-title">Account info</div>
             <Input
+                name="Phone"
                 label="Phone"
                 placeholder="Enter your phone"
                 type="phone"
                 value={phone}
-                onChange={setPhone}
+                onChange={(e) => setPhone(e.target.value)}
             />
             <Input
+                name="Username"
                 label="Username"
                 placeholder="Enter your username"
                 type="username"
                 value={username}
-                onChange={setUsername}
+                onChange={(e) => setUsername(e.target.value)}
             />
             <Input
+                name="fullName"
                 label="Full name"
                 placeholder="Enter your name"
                 type="name"
                 value={fullName}
-                onChange={setFullName}
+                onChange={(e) => setFullName(e.target.value)}
             />
             <Button>Save changes</Button>
         </form>

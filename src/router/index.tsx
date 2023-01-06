@@ -1,3 +1,4 @@
+import Error from "../pages/Error";
 import Faq from "../pages/Faq";
 import Main from "../pages/Main";
 import Profile from "../pages/Profile";
@@ -13,7 +14,8 @@ export enum RouteNames {
     FAQ = '/faq',
     MAIN = '/',
     PROFILE = '/profile',
-    SUBSCRIPTION = '/subscription'
+    SUBSCRIPTION = '/subscription',
+    ERROR = '/error'
 }
 
 export const publicRoutes: IRoute[] = [
@@ -29,6 +31,10 @@ export const publicRoutes: IRoute[] = [
         path: RouteNames.SUBSCRIPTION + '/:id',
         element: <Subscription />
     },
+    {
+        path: RouteNames.ERROR,
+        element: <Error />
+    }
 ]
 
 export const privateRoutes: IRoute[] = [

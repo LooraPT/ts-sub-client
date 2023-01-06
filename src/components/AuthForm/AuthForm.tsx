@@ -1,4 +1,8 @@
+import { useFormik } from 'formik';
 import React, { FC, useState } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useLoginMutation, useRegistrationMutation } from '../../services/apiAuth';
+import { userFetching } from '../../store/reducers/user';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import './AuthForm.scss';
@@ -11,44 +15,63 @@ interface AuthFormProps {
 }
 
 const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistration }) => {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+    const [confirmPassword, setConfirmPassword] = useState<string>('')
+    const [login, { isError: loginError }] = useLoginMutation();
+    const [registrationSubmit, { isError: regError }] = useRegistrationMutation();
     const [checkBox, setCheckBox] = useState<boolean>(false)
+    const dispatch = useAppDispatch();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        if (registration) {
-            console.log(email, password, checkBox)
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: async (values) => {
+            if (!registration) {
+                const user = await login({ email: values.email, password: values.password })
+                if ("data" in user) {
+                    dispatch(userFetching(user.data))
+                    if (setModal) {
+                        setModal(false)
+                    }
+                }
+                values.email = ''
+                values.password = ''
+            }
+            if (registration) {
+                if (values.password === confirmPassword && checkBox) {
+                    const user = await registrationSubmit({ email: values.email, password: values.password })
+                    if ("data" in user) {
+                        dispatch(userFetching(user.data))
+                        if (setModal) {
+                            setModal(false)
+                        }
+                    }
+                }
+                values.email = ''
+                values.password = ''
+                setConfirmPassword('')
+            }
         }
-        if (!registration) {
-            console.log(email, password)
-        }
-        setEmail('')
-        setPassword('')
-        if (setModal) {
-            setModal(false)
-        }
-
-    }
+    })
 
     if (!modal) {
-        if (email) {
-            setEmail('')
+        if (formik.values.email) {
+            formik.values.email = ''
         }
-        if (password) {
-            setPassword('')
+        if (formik.values.password) {
+            formik.values.password = ''
         }
         if (checkBox) {
             setCheckBox(false)
         }
-        if (passwordConfirm) {
-            setPasswordConfirm('')
+        if (confirmPassword) {
+            setConfirmPassword('')
         }
     }
 
     return (
-        <form className="auth" onSubmit={handleSubmit}>
+        <form className="auth" onSubmit={formik.handleSubmit}>
             {registration
                 ? <div className="new__user">
                     Already have an account? <span onClick={() => setRegistration(false)}>Sign In</span>
@@ -56,28 +79,32 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
                 : <div className="new__user">
                     New user? <span onClick={() => setRegistration(true)}>Create an account</span>
                 </div>}
+            {loginError && <div className="error">email or password is not correct</div>}
             <Input
+                name='email'
                 label='Email Address'
                 placeholder='Enter your email'
                 type='email'
-                value={email}
-                onChange={setEmail}
+                value={formik.values.email}
+                onChange={formik.handleChange}
             />
             <Input
+                name='password'
                 label='Password'
                 placeholder='******'
                 type='password'
-                value={password}
-                onChange={setPassword}
+                value={formik.values.password}
+                onChange={formik.handleChange}
             />
             {registration &&
                 <>
-                    < Input
+                    <Input
+                        name='confirmPassword'
                         label='Password confirm'
                         placeholder='******'
                         type='password'
-                        value={passwordConfirm}
-                        onChange={setPasswordConfirm}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <label className="checkbox__reg">
                         <input
@@ -94,11 +121,11 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
                 {registration
                     ?
                     <div className="sign__up">
-                        <Button>Sign up</Button>
+                        <Button type='submit'>Sign up</Button>
                     </div>
                     : <>
                         <div className="auth__forgot">Forgot password?</div>
-                        <Button>Log in</Button>
+                        <Button type='submit'>Log in</Button>
                     </>
                 }
             </div>

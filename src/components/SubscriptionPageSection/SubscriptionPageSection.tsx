@@ -2,42 +2,19 @@ import React, { FC } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import SubscriptionLevelItem from './SubscriptionLevelItem/SubscriptionLevelItem';
 import classes from './SubscriptionPageSection.module.scss';
-
-const subscriptionInfo = {
-    id: 4,
-    name: "Spotify",
-    img: '',
-    description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-    levels: [
-        {
-            id: 1,
-            level: 'individual',
-            priceSix: '100',
-            priceTwelve: '120',
-        },
-        {
-            id: 2,
-            level: 'duo',
-            priceSix: '100',
-            priceTwelve: '120',
-        },
-        {
-            id: 3,
-            level: 'premium',
-            priceSix: '100',
-            priceTwelve: '120',
-        },
-    ]
-}
+import { useSubscriptionGetOneQuery } from '../../services/apiSubscription';
+import { useParams } from 'react-router-dom';
 
 const SubscriptionPageSection: FC = () => {
+    const { id } = useParams();
+    const { data } = useSubscriptionGetOneQuery(id || '8')
 
     return (
         <section className={classes.subscription}>
             <div className={classes.subscription__container}>
-                <SectionTitle>Choose a {subscriptionInfo.name} Plan</SectionTitle>
+                <SectionTitle>Choose a {data?.name} Plan</SectionTitle>
                 <div className={classes.subscription__levels}>
-                    {subscriptionInfo.levels.map(level =>
+                    {data?.levels.map(level =>
                         <SubscriptionLevelItem key={level.id} level={level} />
                     )}
                 </div>

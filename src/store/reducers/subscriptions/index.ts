@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ISubscription } from "../../../types/ISubscription";
+import { subscriptionMock } from "./mockDataSubscription";
 
 
 export interface SubscriptionState {
@@ -8,36 +9,7 @@ export interface SubscriptionState {
 }
 
 const initialState: SubscriptionState = {
-    subscriptions: [
-        {
-            id: 1,
-            name: "Netflix",
-            img: '',
-            description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        },
-        {
-            id: 2,
-            name: "YouTube Premium",
-            img: '',
-            description: 'fdfdffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        },
-        {
-            id: 3,
-            name: "Spotify",
-            img: '',
-            description: 'fdfdfffffffffffffffffffffffffffffffffdfdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        },
-        {
-            id: 4,
-            name: "Spotify",
-            img: '',
-            description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        },
-    ],
+    subscriptions: [...subscriptionMock],
     selectedSubscription: {} as ISubscription
 }
 

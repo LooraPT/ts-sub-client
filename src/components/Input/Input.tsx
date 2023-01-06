@@ -6,18 +6,21 @@ interface InputProps {
     type: string;
     value: string;
     placeholder: string;
-    onChange: (e: string) => void;
+    onChange: (e: any) => void;
+    name: string;
 }
 
-const Input: FC<InputProps> = ({ label, onChange, type, value, placeholder }) => {
+const Input: FC<InputProps> = ({ label, onChange, type, value, placeholder, name }) => {
     return (
-        <label className="label">
+        <label htmlFor={name} className="label">
             {label}
             <input
+                id={name}
+                name={name}
                 type={type}
                 value={value}
                 placeholder={placeholder}
-                onChange={e => onChange(e.target.value)}
+                onChange={onChange}
             />
         </label>
     );

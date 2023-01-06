@@ -1,9 +1,10 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { userFetching, userLogout } from '../store/reducers/user';
-import { IUser } from '../types/IUser';
+import { IAuth } from '../types/IAuth';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL || 'http://localhost:5000',
+    credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const accessToken = localStorage.getItem('accessToken')
         if (accessToken) {
@@ -27,7 +28,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         }, api, extraOptions);
 
         if (refreshResult.data) {
-            api.dispatch(userFetching(refreshResult.data as IUser))
+            api.dispatch(userFetching(refreshResult.data as IAuth))
             result = await baseQuery(args, api, extraOptions);
         } else {
             api.dispatch(userLogout())

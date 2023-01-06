@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IAuth } from "../../../types/IAuth";
 import { IProfile } from "../../../types/IProfile";
 import { ISubscription } from "../../../types/ISubscription";
 import { IUser } from "../../../types/IUser";
@@ -15,35 +16,25 @@ const initialState: UserState = {
     auth: false,
     user: {} as IUser,
     profile: {} as IProfile,
-    subscriptions: [
-        {
-            id: 1,
-            name: "Netflix",
-            img: 'Desktop/nesflix.jpg',
-            description: 'fdfdffffffffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        },
-        {
-            id: 2,
-            name: "YouTube Premium",
-            img: 'Desktop/nesflix.jpg',
-            description: 'fdfdffffffffffffffffffffffffffdfdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-            levels: []
-        }
-    ]
+    subscriptions: []
 }
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userFetching(state, action: PayloadAction<IUser>) {
+        userFetching(state, action: PayloadAction<IAuth>) {
             state.auth = true
-            state.user = action.payload
+            state.user = action.payload.user
+            state.profile = action.payload.profile
+            localStorage.setItem('accessToken', action.payload.accessToken)
         },
         userLogout(state) {
-            state.auth = false
+            localStorage.removeItem('accessToken')
             state.user = {} as IUser
+            state.profile = {} as IProfile
+            state.subscriptions = []
+            state.auth = false
         }
     }
 })
