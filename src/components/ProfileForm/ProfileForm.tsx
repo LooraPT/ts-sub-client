@@ -1,4 +1,8 @@
 import React, { FC, useState } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useUpdateInformationProfileMutation } from '../../services/apiProfile';
+import { updateProfile } from '../../store/reducers/user';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import './ProfileForm.scss';
@@ -7,12 +11,19 @@ const ProfileForm: FC = () => {
     const [phone, setPhone] = useState<string>('')
     const [username, setUsername] = useState<string>('')
     const [fullName, setFullName] = useState<string>('')
+    const [updateInfo] = useUpdateInformationProfileMutation();
+    const { id } = useAppSelector(state => state.user.user)
+    const dispatch = useAppDispatch()
 
-    const profileSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const profileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setPhone('')
-        setUsername('')
-        setFullName('')
+        const newInformation = await updateInfo({ id, phone, username, fullName })
+        if ("data" in newInformation) {
+            dispatch(updateProfile(newInformation.data))
+            setPhone('')
+            setUsername('')
+            setFullName('')
+        }
     }
 
     return (

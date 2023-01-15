@@ -1,4 +1,7 @@
 import React, { FC } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useLogoutMutation } from '../../services/apiAuth';
+import { userLogout } from '../../store/reducers/user';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import classes from './LogoutModal.module.scss';
@@ -9,6 +12,14 @@ interface LogoutModalProps {
 }
 
 const LogoutModal: FC<LogoutModalProps> = ({ active, setActive }) => {
+    const dispatch = useAppDispatch();
+    const [exit, { }] = useLogoutMutation();
+
+    const logout = async () => {
+        await exit()
+        dispatch(userLogout())
+        setActive(false)
+    }
 
     return (
         <Modal
@@ -18,7 +29,7 @@ const LogoutModal: FC<LogoutModalProps> = ({ active, setActive }) => {
         >
             <div className={classes.button}>
                 <Button black onClick={() => setActive(false)}>Cancel</Button>
-                <Button>Yes, Logout</Button>
+                <Button onClick={logout}>Yes, Logout</Button>
             </div>
         </Modal>
     );

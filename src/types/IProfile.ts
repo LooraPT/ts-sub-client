@@ -4,4 +4,5 @@ export interface IProfile {
     phone: string | null;
     username: string | null;
     fullName: string | null;
+    userId: string;
 }

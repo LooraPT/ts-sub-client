@@ -23,8 +23,13 @@ const apiAuth = api.injectEndpoints({
                 url: '/auth/logout',
                 method: 'POST'
             })
+        }),
+        refresh: build.query<IAuth | null, void>({
+            query: () => ({
+                url: '/auth/refresh'
+            })
         })
     })
 })
 
-export const { useLoginMutation, useRegistrationMutation, useLogoutMutation } = apiAuth;
+export const { useLoginMutation, useRegistrationMutation, useLogoutMutation, useRefreshQuery } = apiAuth;

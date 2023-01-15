@@ -3,11 +3,13 @@ import cl from './Loader.module.scss';
 
 const Loader: FC = () => {
     return (
-        <div className={cl.loader}>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className={cl.center}>
+            <div className={cl.loader}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     );
 }

@@ -3,12 +3,28 @@ import { ILevelSubscription } from '../../../types/ILevelSubscription';
 import classes from './SubscriptionLevelItem.module.scss';
 import Check from '../../../assets/Icons/check.svg';
 import Button from '../../Button/Button';
+import { usePurchaseSubscriptionMutation } from '../../../services/apiSubscription';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { useNavigate, useParams } from 'react-router-dom';
+import { RouteNames } from '../../../router';
 
 interface SubscriptionLevelItemProps {
     level: ILevelSubscription;
 }
 
 const SubscriptionLevelItem: FC<SubscriptionLevelItemProps> = ({ level }) => {
+    const [postPurchase, { error }] = usePurchaseSubscriptionMutation();
+    const { user, profile } = useAppSelector(state => state.user)
+    const { id } = useParams();
+    const navigate = useNavigate()
+
+    const purchase = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        await postPurchase({ email: user.email, fullName: profile.fullName || '', phone: profile.phone || '', userId: user.id, subscriptionId: id || '' })
+        if (!error) {
+            navigate(RouteNames.PROFILE)
+        }
+    }
+
     return (
         <div className={classes.level}>
             <div className={classes.level__name}>
@@ -34,7 +50,7 @@ const SubscriptionLevelItem: FC<SubscriptionLevelItemProps> = ({ level }) => {
                     ${level.priceSix}
                 </div>
                 <div className={classes.level__button}>
-                    <Button black>Get started</Button>
+                    <Button onClick={purchase} black>Get started</Button>
                 </div>
             </div>
         </div>

@@ -35,9 +35,17 @@ export const userSlice = createSlice({
             state.profile = {} as IProfile
             state.subscriptions = []
             state.auth = false
+        },
+        updateProfile(state, action: PayloadAction<IProfile>) {
+            state.profile = action.payload
+        },
+        userSubscriptionFetching(state, action: PayloadAction<ISubscription[] | null>) {
+            if (action.payload) {
+                state.subscriptions = action.payload
+            }
         }
     }
 })
 
 export const userReducers = userSlice.reducer;
-export const { userFetching, userLogout } = userSlice.actions;
+export const { userFetching, userLogout, updateProfile, userSubscriptionFetching } = userSlice.actions;

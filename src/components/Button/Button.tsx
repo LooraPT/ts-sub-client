@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import './Button.scss';
 
 interface ButtonProps {
-    onClick?: () => void;
+    onClick?: (e?: any) => void;
     white?: boolean;
     children: React.ReactNode
     disabled?: boolean;

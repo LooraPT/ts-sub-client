@@ -18,6 +18,7 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [login, { isError: loginError }] = useLoginMutation();
     const [registrationSubmit, { isError: regError }] = useRegistrationMutation();
+    const [customError, setCustomError] = useState<string>('');
     const [checkBox, setCheckBox] = useState<boolean>(false)
     const dispatch = useAppDispatch();
 
@@ -47,6 +48,13 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
                             setModal(false)
                         }
                     }
+                } else {
+                    if (!checkBox) {
+                        setCustomError('private policy is required')
+                    }
+                    if (values.password !== confirmPassword) {
+                        setCustomError('Passwords do not match')
+                    }
                 }
                 values.email = ''
                 values.password = ''
@@ -68,6 +76,9 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
         if (confirmPassword) {
             setConfirmPassword('')
         }
+        if (customError) {
+            setCustomError('')
+        }
     }
 
     return (
@@ -80,6 +91,7 @@ const AuthForm: FC<AuthFormProps> = ({ modal, setModal, registration, setRegistr
                     New user? <span onClick={() => setRegistration(true)}>Create an account</span>
                 </div>}
             {loginError && <div className="error">email or password is not correct</div>}
+            {customError && <div className="error">{customError}</div>}
             <Input
                 name='email'
                 label='Email Address'

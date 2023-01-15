@@ -1,30 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import cl from './AccountInfo.module.scss';
 import ProfileNallAuth from '../../assets/ProfileNallAuth.svg';
-import { IProfile } from '../../types/IProfile';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useUpdateImgProfileMutation } from '../../services/apiProfile';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { updateProfile } from '../../store/reducers/user';
 
 const AccountInfo: FC = () => {
-    const [file, setFile] = useState<File | null>(null)
+    const { profile, user } = useAppSelector(state => state.user)
+    const [newImg] = useUpdateImgProfileMutation();
+    const dispatch = useAppDispatch();
 
-    const profileUser: IProfile = {
-        id: 1,
-        img: null,
-        phone: null,
-        fullName: null,
-        username: null
-    }
-
-    const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setFile(e.target.files[0])
-            console.log(file)
+            const formData = new FormData()
+            formData.append('img', e.target.files[0])
+            const fileName = await newImg({ id: user.id, img: formData })
+            if ("data" in fileName) {
+                dispatch(updateProfile(fileName.data))
+            }
         }
     }
 
     return (
         <div className={cl.info}>
             <div className={cl.info__img}>
-                <img src={profileUser.img ? profileUser.img : ProfileNallAuth} alt="Profile" />
+                <img src={profile.img ? process.env.REACT_APP_BASE_URL + '/' + profile.img : ProfileNallAuth} alt="Profile" />
                 <label>
                     Upload file
                     <input
@@ -35,13 +36,13 @@ const AccountInfo: FC = () => {
                 </label>
             </div>
             <div className={cl.info__fullName}>
-                Your name: {profileUser.fullName ? profileUser.fullName : 'Empty'}
+                Your name: {profile.fullName ? profile.fullName : 'Empty'}
             </div>
             <div className={cl.info__username}>
-                Your username: {profileUser.username ? profileUser.username : 'Empty'}
+                Your username: {profile.username ? profile.username : 'Empty'}
             </div>
             <div className={cl.info__number}>
-                Your phone: {profileUser.phone ? profileUser.phone : 'Empty'}
+                Your phone: {profile.phone ? profile.phone : 'Empty'}
             </div>
         </div>
     );

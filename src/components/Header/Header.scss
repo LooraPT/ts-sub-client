@@ -96,7 +96,7 @@
                 }
 
                 .menu__link {
-                    img {
+                    img:last-child {
                         transform: rotate(-180deg);
                     }
                 }
@@ -205,4 +205,10 @@
     @media (max-width: $mobileSmall ) {
         flex: 0 0 32px;
     }
+}
+
+.menu__profile-img {
+    flex: 0 0 32px;
+    height: 32px;
+    border-radius: 50%;
 }

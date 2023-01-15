@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './UserProfile.scss';
 import Exit from '../../assets/Icons/Exit.svg';
 import Wallet from '../../assets/Icons/wallet.svg';
@@ -6,11 +6,21 @@ import Setting from '../../assets/Icons/setting.svg';
 import ProfileForm from '../ProfileForm/ProfileForm';
 import AccountInfo from '../AccountInfo/AccountInfo';
 import UserSubscriptions from '../UserSubscriptions/UserSubscriptions';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import LogoutModal from '../LogoutModal/LogoutModal';
 
 const UserProfile: FC = () => {
     const [info, setInfo] = useState<boolean>(true);
     const [update, setUpdate] = useState<boolean>(false);
     const [subscriptions, setSubscriptions] = useState<boolean>(false);
+    const { profile } = useAppSelector(state => state.user)
+    const [exitModal, setExitModal] = useState<boolean>(false)
+
+    useEffect(() => {
+        setInfo(true)
+        setUpdate(false)
+        setSubscriptions(false)
+    }, [profile])
 
     const profileInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
         setInfo(true)
@@ -37,7 +47,7 @@ const UserProfile: FC = () => {
                     <div className="main-profile__title">Personal data management</div>
                     <div className="main-profile__exit">
                         <img src={Exit} alt="Exit" />
-                        <div>Exit</div>
+                        <div onClick={() => setExitModal(true)}>Exit</div>
                     </div>
                 </div>
                 <div className="profile__content content-profile">
@@ -61,6 +71,10 @@ const UserProfile: FC = () => {
                         {subscriptions && <UserSubscriptions />}
                     </div>
                 </div>
+                <LogoutModal
+                    active={exitModal}
+                    setActive={setExitModal}
+                />
             </div>
         </section>
     );

@@ -17,23 +17,29 @@ import { navigationList } from './navData';
 import { useSubscriptionGetAllQuery } from '../../services/apiSubscription';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { subscriptionFetching } from '../../store/reducers/subscriptions';
+import { useRefreshQuery } from '../../services/apiAuth';
+import { userFetching } from '../../store/reducers/user';
 
 
 const Header: FC = () => {
     const { data } = useSubscriptionGetAllQuery();
+    const { data: userData } = useRefreshQuery();
     const dispatch = useAppDispatch();
     const [classes, setClasses] = useState<string[]>(["menu__body"])
     const [modal, setModal] = useState<boolean>(false)
     const [registration, setRegistration] = useState<boolean>(false)
     const [logoutModal, setLogoutModal] = useState<boolean>(false)
-    const { auth } = useAppSelector(state => state.user)
+    const { auth, profile } = useAppSelector(state => state.user)
     const { subscriptions } = useAppSelector(state => state.subscription)
 
     useEffect(() => {
         if (data) {
             dispatch(subscriptionFetching(data));
         }
-    }, [data, dispatch])
+        if (userData) {
+            dispatch(userFetching(userData))
+        }
+    }, [data, dispatch, userData])
 
     const menuActive = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (classes.length <= 1) {
@@ -66,7 +72,15 @@ const Header: FC = () => {
                             )}
                             {auth &&
                                 <li className="menu__item">
-                                    <button className="menu__link"><img src={ProfileNallAuth} alt="Profile" /> Profile<img src={Arrow} alt="arrow" /></button>
+                                    <button className="menu__link">
+                                        <img
+                                            className="menu__profile-img"
+                                            src={profile.img ? process.env.REACT_APP_BASE_URL + '/' + profile.img : ProfileNallAuth}
+                                            alt="Profile"
+                                        />
+                                        Profile
+                                        <img src={Arrow} alt="arrow" />
+                                    </button>
                                     <ul className="menu__sub-list profile-menu">
                                         <li className="menu__sub-item">
                                             <NavLink to={RouteNames.PROFILE} className="menu__sub-link"><img src={ProfileNallAuth} alt="Img" />Profile</NavLink>

@@ -1,8 +1,7 @@
 import { IRole } from "./IRole";
-import { ISubscription } from "./ISubscription";
 
 export interface IUser {
-    id: number;
+    id: string;
     email: string;
     roles: IRole[];
 }

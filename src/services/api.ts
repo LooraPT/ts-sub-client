@@ -20,11 +20,10 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     extraOptions
 ) => {
     let result = await baseQuery(args, api, extraOptions);
-
     if (result.error && result.error.status === 401) {
         const refreshResult = await baseQuery({
             url: '/auth/refresh',
-            method: 'POST'
+            method: 'GET'
         }, api, extraOptions);
 
         if (refreshResult.data) {
@@ -40,5 +39,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: baseQueryWithReauth,
+    tagTypes: ['Subscription'],
     endpoints: () => ({})
 })
